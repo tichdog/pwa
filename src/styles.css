@@ -1,0 +1,120 @@
+@import 'tailwindcss';
+
+/* CSS переменные для светлой темы */
+:root {
+  --color-bg: #f9fafb;
+  --color-bg-gradient: #eff6ff;
+  --color-text: #111827;
+  --color-text-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-card: #ffffff;
+  --color-header: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Цвета для заметок */
+  --color-note-blue: #dbeafe;
+  --color-note-green: #d1fae5;
+  --color-note-yellow: #fef3c7;
+  --color-note-pink: #fce7f3;
+  --color-note-purple: #f3e8ff;
+  --color-note-gray: #f3f4f6;
+}
+
+/* CSS переменные для темной темы */
+.dark {
+  --color-bg: #111827;
+  --color-bg-gradient: #1e293b;
+  --color-text: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-border: #374151;
+  --color-card: #1f2937;
+  --color-header: #1f2937;
+  --color-gray-50: #111827;
+  --color-gray-100: #1f2937;
+  --color-gray-200: #374151;
+  --color-gray-300: #4b5563;
+  --color-gray-400: #6b7280;
+  --color-gray-500: #9ca3af;
+  --color-gray-600: #d1d5db;
+  --color-gray-700: #e5e7eb;
+  --color-gray-800: #f3f4f6;
+  --color-gray-900: #f9fafb;
+  
+  /* Цвета для заметок в темной теме */
+  --color-note-blue: #1e3a8a;
+  --color-note-green: #064e3b;
+  --color-note-yellow: #78350f;
+  --color-note-pink: #831843;
+  --color-note-purple: #4c1d95;
+  --color-note-gray: #374151;
+}
+
+body {
+  background: linear-gradient(135deg, var(--color-bg), var(--color-bg-gradient));
+  color: var(--color-text);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Утилитарные классы для использования CSS переменных */
+.bg-primary {
+  background-color: var(--color-bg);
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--color-bg), var(--color-bg-gradient));
+}
+
+.bg-card {
+  background-color: var(--color-card);
+}
+
+.bg-header {
+  background-color: var(--color-header);
+}
+
+.text-primary {
+  color: var(--color-text);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.border-primary {
+  border-color: var(--color-border);
+}
+
+/* Цвета для заметок */
+.note-blue {
+  background-color: var(--color-note-blue);
+}
+
+.note-green {
+  background-color: var(--color-note-green);
+}
+
+.note-yellow {
+  background-color: var(--color-note-yellow);
+}
+
+.note-pink {
+  background-color: var(--color-note-pink);
+}
+
+.note-purple {
+  background-color: var(--color-note-purple);
+}
+
+.note-gray {
+  background-color: var(--color-note-gray);
+}
