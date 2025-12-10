@@ -3,32 +3,32 @@ import { Note, NoteColor } from '../models/note.model';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NoteService {
   private readonly STORAGE_KEY = 'notes_app_data';
-  
+
   // Основной список заметок
   private notesSignal = signal<Note[]>(this.loadNotes());
-  
+
   // Публичный computed сигнал для доступа
   notes = computed(() => this.notesSignal());
-  
+
   // Сигнал для поиска
   private searchQuerySignal = signal<string>('');
-  
+
   // Фильтрованные заметки
   filteredNotes = computed(() => {
     const query = this.searchQuerySignal().toLowerCase().trim();
     const notes = this.notesSignal();
-    
+
     if (!query) {
       return notes;
     }
-    
-    return notes.filter(note => 
-      note.title.toLowerCase().includes(query) || 
-      note.content.toLowerCase().includes(query)
+
+    return notes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(query) || note.content.toLowerCase().includes(query)
     );
   });
 
@@ -61,7 +61,7 @@ export class NoteService {
         createdAt: new Date(),
         updatedAt: new Date(),
         pinned: true,
-        tags: ['приветствие']
+        tags: [''],
       },
       {
         id: uuidv4(),
@@ -71,7 +71,7 @@ export class NoteService {
         createdAt: new Date(),
         updatedAt: new Date(),
         pinned: false,
-        tags: ['работа', 'идеи']
+        tags: [''],
       },
       {
         id: uuidv4(),
@@ -81,8 +81,8 @@ export class NoteService {
         createdAt: new Date(),
         updatedAt: new Date(),
         pinned: false,
-        tags: ['покупки']
-      }
+        tags: [''],
+      },
     ];
 
     this.notesSignal.set(sampleNotes);
@@ -99,42 +99,34 @@ export class NoteService {
       createdAt: new Date(),
       updatedAt: new Date(),
       pinned: false,
-      tags: []
+      tags: [],
     };
 
-    this.notesSignal.update(notes => [...notes, newNote]);
+    this.notesSignal.update((notes) => [...notes, newNote]);
     this.saveNotes();
   }
 
   updateNote(id: string, updates: Partial<Note>) {
-    this.notesSignal.update(notes => 
-      notes.map(note => 
-        note.id === id 
-          ? { ...note, ...updates, updatedAt: new Date() }
-          : note
-      )
+    this.notesSignal.update((notes) =>
+      notes.map((note) => (note.id === id ? { ...note, ...updates, updatedAt: new Date() } : note))
     );
     this.saveNotes();
   }
 
   deleteNote(id: string) {
-    this.notesSignal.update(notes => notes.filter(note => note.id !== id));
+    this.notesSignal.update((notes) => notes.filter((note) => note.id !== id));
     this.saveNotes();
   }
 
   togglePin(id: string) {
-    this.notesSignal.update(notes => 
-      notes.map(note => 
-        note.id === id 
-          ? { ...note, pinned: !note.pinned }
-          : note
-      )
+    this.notesSignal.update((notes) =>
+      notes.map((note) => (note.id === id ? { ...note, pinned: !note.pinned } : note))
     );
     this.saveNotes();
   }
 
   getNote(id: string): Note | undefined {
-    return this.notesSignal().find(note => note.id === id);
+    return this.notesSignal().find((note) => note.id === id);
   }
 
   // Методы для поиска
@@ -152,10 +144,10 @@ export class NoteService {
 
   // Получить закрепленные и обычные заметки
   get pinnedNotes() {
-    return computed(() => this.filteredNotes().filter(note => note.pinned));
+    return computed(() => this.filteredNotes().filter((note) => note.pinned));
   }
 
   get otherNotes() {
-    return computed(() => this.filteredNotes().filter(note => !note.pinned));
+    return computed(() => this.filteredNotes().filter((note) => !note.pinned));
   }
 }

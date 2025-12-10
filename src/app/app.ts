@@ -14,7 +14,7 @@ import { RouterOutlet } from '@angular/router';
             <div class="flex items-center space-x-3">
               <h1 class="text-2xl font-bold text-primary">Notes</h1>
             </div>
-            <button 
+            <button
               class="p-2 rounded-full hover:opacity-80 transition-opacity"
               (click)="toggleTheme()"
               [style.backgroundColor]="isDarkTheme ? '#4b5563' : '#f3f4f6'"
@@ -26,12 +26,12 @@ import { RouterOutlet } from '@angular/router';
           </div>
         </div>
       </header>
-      
+
       <main class="container mx-auto px-4 py-8">
         <router-outlet></router-outlet>
       </main>
     </div>
-  `
+  `,
 })
 export class App implements OnInit {
   isDarkTheme = false;
@@ -42,14 +42,14 @@ export class App implements OnInit {
 
   private initializeTheme() {
     const savedTheme = localStorage.getItem('notes-theme');
-    
+
     if (savedTheme) {
       this.isDarkTheme = savedTheme === 'dark';
     } else {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       this.isDarkTheme = prefersDark;
     }
-    
+
     this.applyTheme();
   }
 

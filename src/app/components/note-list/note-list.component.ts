@@ -21,7 +21,7 @@ import { NoteCardComponent } from '../note-card/note-card.component';
               (ngModelChange)="onSearch($event)"
               placeholder="Поиск заметок..."
               class="w-full px-4 py-3 pl-12 bg-card text-primary rounded-xl border border-primary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
-            >
+            />
             <span class="absolute left-4 top-3.5 text-secondary">🔍</span>
             <button
               *ngIf="searchQuery().trim()"
@@ -43,27 +43,23 @@ import { NoteCardComponent } from '../note-card/note-card.component';
       </div>
 
       <!-- Сообщение если нет заметок -->
-      <div *ngIf="noteService.filteredNotes().length === 0 && !noteService.isSearching()" 
-           class="text-center py-20">
+      <div
+        *ngIf="noteService.filteredNotes().length === 0 && !noteService.isSearching()"
+        class="text-center py-20"
+      >
         <div class="text-secondary text-6xl mb-4">📝</div>
-        <h3 class="text-xl font-medium text-primary mb-2">
-          Нет заметок
-        </h3>
-        <p class="text-secondary">
-          Создайте свою первую заметку!
-        </p>
+        <h3 class="text-xl font-medium text-primary mb-2">Нет заметок</h3>
+        <p class="text-secondary">Создайте свою первую заметку!</p>
       </div>
 
       <!-- Сообщение если поиск не дал результатов -->
-      <div *ngIf="noteService.filteredNotes().length === 0 && noteService.isSearching()" 
-           class="text-center py-20">
+      <div
+        *ngIf="noteService.filteredNotes().length === 0 && noteService.isSearching()"
+        class="text-center py-20"
+      >
         <div class="text-secondary text-6xl mb-4">🔍</div>
-        <h3 class="text-xl font-medium text-primary mb-2">
-          Ничего не найдено
-        </h3>
-        <p class="text-secondary">
-          Попробуйте другой запрос
-        </p>
+        <h3 class="text-xl font-medium text-primary mb-2">Ничего не найдено</h3>
+        <p class="text-secondary">Попробуйте другой запрос</p>
         <button
           (click)="clearSearch()"
           class="mt-4 px-4 py-2 text-blue-500 hover:text-blue-600"
@@ -74,8 +70,10 @@ import { NoteCardComponent } from '../note-card/note-card.component';
       </div>
 
       <!-- Статистика поиска -->
-      <div *ngIf="noteService.isSearching() && noteService.filteredNotes().length > 0" 
-           class="mb-4 text-sm text-secondary">
+      <div
+        *ngIf="noteService.isSearching() && noteService.filteredNotes().length > 0"
+        class="mb-4 text-sm text-secondary"
+      >
         Найдено заметок: {{ noteService.filteredNotes().length }}
         <button
           (click)="clearSearch()"
@@ -122,17 +120,23 @@ import { NoteCardComponent } from '../note-card/note-card.component';
       </div>
 
       <!-- Редактор заметки -->
-      <div *ngIf="showEditor" class="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50">
-        <div 
-          [class]="'rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden ' + getModalColorClass(selectedColor)"
+      <div
+        *ngIf="showEditor"
+        class="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50"
+      >
+        <div
+          [class]="
+            'rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden ' +
+            getModalColorClass(selectedColor)
+          "
         >
           <div class="p-6 border-b border-primary">
             <div class="flex justify-between items-center">
               <h3 class="text-xl font-bold text-primary">
-                {{ editingNote ? 'Редактировать заметку' : 'Новая заметка' }} 
+                {{ editingNote ? 'Редактировать заметку' : 'Новая заметка' }}
               </h3>
-              <button 
-                (click)="closeEditor()" 
+              <button
+                (click)="closeEditor()"
                 class="text-secondary hover:text-primary text-2xl transition-colors"
                 type="button"
               >
@@ -147,8 +151,8 @@ import { NoteCardComponent } from '../note-card/note-card.component';
               [(ngModel)]="editorTitle"
               placeholder="Заголовок"
               class="w-full text-2xl font-bold mb-4 p-2 focus:outline-none bg-transparent text-primary placeholder:text-secondary"
-            >
-            
+            />
+
             <textarea
               [(ngModel)]="editorContent"
               placeholder="Начните писать здесь..."
@@ -161,7 +165,10 @@ import { NoteCardComponent } from '../note-card/note-card.component';
               <div class="flex gap-3">
                 <button
                   *ngFor="let color of colors"
-                  [class]="'w-10 h-10 rounded-full border-2 transition-all duration-200 ' + getColorButtonClass(color)"
+                  [class]="
+                    'w-10 h-10 rounded-full border-2 transition-all duration-200 ' +
+                    getColorButtonClass(color)
+                  "
                   [class.ring-2]="selectedColor === color"
                   [class.ring-offset-2]="selectedColor === color"
                   [class.ring-blue-500]="selectedColor === color"
@@ -185,8 +192,12 @@ import { NoteCardComponent } from '../note-card/note-card.component';
             <button
               (click)="saveNote()"
               [disabled]="!editorTitle.trim()"
-              [class]="'px-5 py-2.5 rounded-lg text-white font-medium transition-colors ' + 
-                (editorTitle.trim() ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed')"
+              [class]="
+                'px-5 py-2.5 rounded-lg text-white font-medium transition-colors ' +
+                (editorTitle.trim()
+                  ? 'bg-blue-500 hover:bg-blue-600'
+                  : 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed')
+              "
               type="button"
             >
               Сохранить
@@ -196,11 +207,18 @@ import { NoteCardComponent } from '../note-card/note-card.component';
       </div>
 
       <!-- Модалка подтверждения удаления -->
-      <div *ngIf="showDeleteModal" class="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50">
-        <div class="bg-card rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-primary">
+      <div
+        *ngIf="showDeleteModal"
+        class="fixed inset-0 bg-black/50 dark:bg-black/70 flex items-center justify-center p-4 z-50"
+      >
+        <div
+          class="bg-card rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-primary"
+        >
           <div class="p-6 border-b border-primary">
             <div class="flex items-center space-x-3 mb-4">
-              <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center">
+              <div
+                class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center"
+              >
                 <span class="text-red-500 dark:text-red-300 text-xl">⚠️</span>
               </div>
               <h3 class="text-xl font-bold text-primary">
@@ -231,36 +249,36 @@ import { NoteCardComponent } from '../note-card/note-card.component';
         </div>
       </div>
     </div>
-  `
+  `,
 })
 export class NoteListComponent {
   noteService = inject(NoteService);
-  
+
   // Сигналы для поиска
   searchQuery = signal('');
-  
+
   // Сигналы для редактора
   showEditor = false;
   editingNote: Note | null = null;
   editorTitle = '';
   editorContent = '';
   selectedColor: NoteColor = 'blue';
-  
+
   // Сигналы для модалки удаления
   showDeleteModal = false;
   noteToDelete: Note | null = null;
   deleteModalTitle = '';
   deleteModalMessage = '';
-  
+
   colors: NoteColor[] = ['blue', 'green', 'yellow', 'pink', 'purple', 'gray'];
-  
+
   private colorButtonClassMap: Record<NoteColor, string> = {
     blue: 'bg-blue-500 hover:bg-blue-600 border-blue-400',
     green: 'bg-green-500 hover:bg-green-600 border-green-400',
     yellow: 'bg-yellow-500 hover:bg-yellow-600 border-yellow-400',
     pink: 'bg-pink-500 hover:bg-pink-600 border-pink-400',
     purple: 'bg-purple-500 hover:bg-purple-600 border-purple-400',
-    gray: 'bg-gray-500 hover:bg-gray-600 border-gray-400'
+    gray: 'bg-gray-500 hover:bg-gray-600 border-gray-400',
   };
 
   private modalColorClassMap: Record<NoteColor, string> = {
@@ -269,7 +287,7 @@ export class NoteListComponent {
     yellow: 'bg-card border-4 border-yellow-500',
     pink: 'bg-card border-4 border-pink-500',
     purple: 'bg-card border-4 border-purple-500',
-    gray: 'bg-card border-4 border-gray-500'
+    gray: 'bg-card border-4 border-gray-500',
   };
 
   // Методы для поиска
@@ -341,7 +359,7 @@ export class NoteListComponent {
       this.noteService.updateNote(this.editingNote.id, {
         title: this.editorTitle,
         content: this.editorContent,
-        color: this.selectedColor
+        color: this.selectedColor,
       });
     } else {
       this.noteService.addNote(this.editorTitle, this.editorContent, this.selectedColor);
